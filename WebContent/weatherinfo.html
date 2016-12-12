@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Weather Information</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="css/weatherinfo.css">
+<link rel='stylesheet' href='//fonts.googleapis.com/css?family=The Girl Next Door'>
+<script>
+	$(document).ready(function(){
+		$("#checkStatus").click(function(){
+			//alert("hello");
+			var place = $("#place").val();
+			var url = "http://api.apixu.com/v1/current.json?key=7143d9ca6ed347e09ee174722160612&q="+place;
+			$.getJSON(url, function(json) {
+				/* $(".message").html(JSON.stringify(json)); */
+				alert(JSON.stringify(json));
+				var tempc = json.current.temp_c+"<i class='wi wi-celsius'></i>";
+				var weathertype = json.current.condition.text;
+				var icon = "<img src = '" + json.current.condition.icon + "'>"; 
+				var localtime = json.location.localtime;
+				
+				
+				$(".tempc").html(tempc);
+				$(".weathertype").html(weathertype);
+				$(".icon").html(icon); 
+				$(".localtime").html(localtime);
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<div class="row">
+	<div class="col-xs-1 col-md-4"></div>
+	<div class="col-xs-10 col-md-4">
+			<br>
+			Check Current Weather Status
+			<hr>
+		<!-- <div class="row"> -->
+			<!-- <span><input type="text" id="place" placeholder="Enter Location Here"><button id="checkStatus">Check Status</button></span> -->
+			<!-- <div class="col-md-8"><input type="text" id="place" placeholder="Enter Location Here"></div>
+			<div class="col-md-4 btn-group" role="group"><button id="checkStatus">Check</button></div> -->
+			<div class="form-group">
+				<div class="col-xs-10"><input type="text" class="form-control" id="place" placeholder="Enter Location Here"></div>
+      			<div class="col-xs-2"><button type="button" class="btn btn-default" id="checkStatus">Check</button></div>
+    		</div>
+		<!-- </div> -->
+		<div class="row icon"></div>
+		<div class="row message">
+			<div class="col-xs-4 tempc"></div>
+			<div class="col-xs-4 weathertype"></div>
+			<div class="col-xs-4 localtime"></div>
+		</div>
+		<div class="page-footer">
+			<centre>Designed by: Arindam Mondal</centre>
+		</div> 
+	</div>	
+	<div class="col-xs-1 col-md-4"></div>
+</div>
+</body>
+</html>
+
+ 
